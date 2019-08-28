@@ -15,8 +15,9 @@
     <dimen name="text_size_large">14sp</dimen>
     <dimen name="icon_size_toolbar">56dp</dimen>en>
 
-    <dimen name="textSizeLarge">18sp</dimen>
-    <dimen name="textSizeSmall">12sp</dimen>
+    <dimen name="textSizeLarge">14sp</dimen>
+    <dimen name="textSizeNormal">12sp</dimen>
+    <dimen name="textSizeSmall">10sp</dimen>
     <dimen name="textSizeMedium">14sp</dimen>
 
     <dimen name="avatar_image_size">40dp</dimen>

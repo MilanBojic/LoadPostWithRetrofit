@@ -8,5 +8,5 @@ import retrofit2.http.GET
 interface ApiInterface {
 
     @GET("/posts")
-     fun doGetPosts(): Single<Response<List<PostDataItem>>>
+    fun doGetPosts(): Single<Response<List<PostDataItem>>>
 }

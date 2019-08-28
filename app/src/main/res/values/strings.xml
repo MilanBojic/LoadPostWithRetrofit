@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">LoadPostsWithRetrofit</string>
-    <string name="postFromTheUser">Post from the user</string>
+    <string name="app_name">Introduction to Retrofit</string>
+    <string name="postFromTheUser">Posts from the user</string>
 </resources>
