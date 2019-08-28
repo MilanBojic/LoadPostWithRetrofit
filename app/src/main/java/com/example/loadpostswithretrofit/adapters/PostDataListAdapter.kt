@@ -15,7 +15,7 @@ class PostDataListAdapter(
     private val mContext: Context,
     private val mDataList: ArrayList<PostDataItem>
 ) : RecyclerView.Adapter<PostDataListAdapter.DataObjectHolder>() {
-    var publishSubject: PublishSubject<Any> = PublishSubject.create()
+    var disposable: PublishSubject<Any> = PublishSubject.create()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -33,7 +33,7 @@ class PostDataListAdapter(
 
         holder.user.setText(mContext.getText(R.string.postFromTheUser).toString() + " " + postDataItem.userId)
         holder.user.setOnClickListener({ v ->
-            publishSubject.onNext(postDataItem.userId)
+            disposable.onNext(postDataItem.userId)
         })
     }
 

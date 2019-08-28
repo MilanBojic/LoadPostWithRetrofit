@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                                     listOfPosts.distinctBy { postDataItem -> postDataItem.userId } as ArrayList<PostDataItem>)
                             mRecyclerView.adapter = postItemAdapter
 
-                            postItemAdapter.publishSubject.subscribe({ position ->
+                            postItemAdapter.disposable.subscribe({ position ->
                                 val intent =
                                     Intent(this@MainActivity, PostDataDetailsActivity::class.java)
                                 intent.putExtra(
