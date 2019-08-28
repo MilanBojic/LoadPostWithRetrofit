@@ -1,4 +1,4 @@
-# Introduction to Retrofit
+# Introduction to Retrofit + RxJava
 
 ## What is this?
 
