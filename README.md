@@ -11,6 +11,17 @@ Android 5.0 or later (Minimum SDK level 21)
 
 Android Studio 3.0 (to compile and use)
 
+## Using Retrofit + RxJava
+In order to use Retrofit + RxJava, you need to add dependency in your build.gradle
+
+    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    api 'com.google.code.gson:gson:2.8.2'
+    api 'io.reactivex.rxjava2:rxjava:2.2.10'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    
+
 
 ## Example insert operations for each API
 
