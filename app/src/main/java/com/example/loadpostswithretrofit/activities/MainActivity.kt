@@ -12,6 +12,7 @@ import com.example.loadpostswithretrofit.api.APIClient
 import com.example.loadpostswithretrofit.api.ApiInterface
 import com.example.loadpostswithretrofit.model.PostDataItem
 import com.example.loadpostswithretrofit.utils.GlobalConst
+import io.reactivex.Single
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -22,6 +23,7 @@ import java.io.Serializable
 class MainActivity : AppCompatActivity() {
 
 
+    private lateinit var singleResponse: Single<Response<List<PostDataItem>>>
     internal val TAG = MainActivity::class.java.simpleName
     internal var listOfPosts: ArrayList<PostDataItem> = ArrayList()
     internal lateinit var mRecyclerView: RecyclerView
@@ -30,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val apiInterface = APIClient.SingletonConfig.getRetrofit()?.create(ApiInterface::class.java)
-        val singleResponse = apiInterface!!.doGetPosts()
+        singleResponse = apiInterface!!.doGetPosts()
         initViews()
 
         singleResponse
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
             .subscribe(object : SingleObserver<Response<List<PostDataItem>>> {
 
                 override fun onSuccess(response: Response<List<PostDataItem>>) {
+                    Log.i(TAG, "singleResponse onSuccess()")
                     if (response.isSuccessful) {
                         response.body()!!.forEach { postDataItem: PostDataItem? ->
                             listOfPosts.add(postDataItem!!)
@@ -49,12 +52,12 @@ class MainActivity : AppCompatActivity() {
                                     listOfPosts.distinctBy { postDataItem -> postDataItem.userId } as ArrayList<PostDataItem>)
                             mRecyclerView.adapter = postItemAdapter
 
-                            postItemAdapter.disposable.subscribe({ position ->
+                            postItemAdapter.publishSubject.subscribe({ userId ->
                                 val intent =
                                     Intent(this@MainActivity, PostDataDetailsActivity::class.java)
                                 intent.putExtra(
                                     GlobalConst.LIST_OF_POSTS,
-                                    listOfPosts.filter { postDataItem -> postDataItem.userId == position } as Serializable)
+                                    listOfPosts.filter { postDataItem -> postDataItem.userId == userId } as Serializable)
                                 this@MainActivity.startActivity(intent)
 
                             })
@@ -65,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onSubscribe(d: Disposable) {
+                    Log.i(TAG, "singleResponse onSubscribe()")
                 }
 
                 override fun onError(e: Throwable) {
@@ -82,4 +86,5 @@ class MainActivity : AppCompatActivity() {
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         mRecyclerView.layoutManager = linearLayoutManager
     }
+
 }
