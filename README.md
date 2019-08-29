@@ -2,9 +2,10 @@
 
 ## What is this?
 
-Through one simple project(introduction to retrofit), i want to shows how to get data(posts) from remote ## API.
+Through one simple project(introduction to retrofit), i want to shows how to get data(posts) from remote API.
+
 I am load posts from(this is one simple json response)
-## https://jsonplaceholder.typicode.com/posts/
+https://jsonplaceholder.typicode.com/posts/
 
 
 ## Requirements
