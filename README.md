@@ -2,8 +2,10 @@
 
 ## What is this?
 
-Through one simple example(registration module), i want to shows how to persist data using a ***Room***, ***Storio*** and ***SQLite***.
-Our simple application stored only username and password, of course the real registration module is much more complex.
+Through one simple project(introduction to retrofit), i want to shows how to get data(posts) from remote ## API.
+I am load posts from(this is one simple json response)
+## https://jsonplaceholder.typicode.com/posts/
+
 
 ## Requirements
 
