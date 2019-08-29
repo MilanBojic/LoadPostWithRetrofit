@@ -68,10 +68,7 @@ class APIClient {
 
 
 ## Very easy to use:
-  val apiInterface = APIClient.SingletonConfig.getRetrofit()?.create(ApiInterface::class.java)
-  
-  singleResponse = apiInterface!!.doGetPosts()      
-  
+ 
         singleResponse
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
