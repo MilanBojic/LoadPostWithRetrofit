@@ -40,10 +40,8 @@ class PostDataItem(
   
 ## Define API interface
 
-Interface ApiInterface {
-
     @GET("/posts")
-    fun doGetPosts(): Single<Response<List<PostDataItem>>>}
+    fun doGetPosts(): Single<Response<List<PostDataItem>>>
     
     
 ## Define Retrofit
