@@ -38,7 +38,7 @@ class PostDataItem(
     @SerializedName("body") @Expose var body: String)
     
   
-## Define API interface
+## Define API Interface
 
     @GET("/posts")
     fun doGetPosts(): Single<Response<List<PostDataItem>>>
