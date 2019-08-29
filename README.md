@@ -2,7 +2,7 @@
 
 ## What is this?
 
-Through one simple project(introduction to retrofit), i want to shows how to get data(posts) from remote API using retrofit and RxJava.
+Through one simple project(introduction to retrofit), i want to shows how to get data(posts) from remote API using Retrofit and RxJava.
 
 I was loading posts from:
 
@@ -15,7 +15,7 @@ Android 5.0 or later (Minimum SDK level 21)
 
 Android Studio 3.0 (to compile and use)
 
-## Using Retrofit + RxJava
+## Define dependency
 In order to use Retrofit + RxJava, you need to add dependency in your build.gradle
 
     api 'com.squareup.retrofit2:retrofit:2.4.0'
@@ -24,32 +24,65 @@ In order to use Retrofit + RxJava, you need to add dependency in your build.grad
     api 'com.google.code.gson:gson:2.8.2'
     api 'io.reactivex.rxjava2:rxjava:2.2.10'
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+## Define Model - POJO
+
+class PostDataItem(
+    @SerializedName("userId") @Expose var userId: String,
+    @SerializedName("id") @Expose var id: String,
+    @SerializedName("title") var title: String,
+    @SerializedName("body") @Expose var body: String)
+  
+## Define API interface
+
+interface ApiInterface {
+    @GET("/posts")
+    fun doGetPosts(): Single<Response<List<PostDataItem>>>
+}
     
+    
+## Define Retrofit
+class APIClient {
+    object SingletonConfig {
 
+        private var retrofit: Retrofit? = null
+        private const val URL_BASE = "https://jsonplaceholder.typicode.com/posts/"
 
-## Example insert operations for each API
-
-        when (index) {
-            GlobalConst.SQLITE -> {
-                val contentValues = ContentValues()
-                contentValues.put(GlobalConst.COL_2, userName)
-                contentValues.put(GlobalConst.COL_3, password)
-                sqlLiteDataBase.writableDatabase.insert(GlobalConst.USER_TABLE, null, contentValues)
+        fun getRetrofit(): Retrofit? {
+            if (retrofit == null) {
+                retrofit = Retrofit.Builder()
+                    .baseUrl(URL_BASE)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build()
             }
-            GlobalConst.STORIO -> {
-                val user = User()
-                user.userName = userName
-                user.password = password
-                storioApi.addUser(user)
-            }
-            GlobalConst.ROOM -> {
-                val userRoom = UserRoom()
-                userRoom.userName = userName
-                userRoom.password = password
-                roomApi.insertUserRoom(userRoom)
-            }
+            return retrofit
         }
+    }
+}
 
+
+
+## Very easy to use:
+  val apiInterface = APIClient.SingletonConfig.getRetrofit()?.create(ApiInterface::class.java)
+  singleResponse = apiInterface!!.doGetPosts()      
+  
+        singleResponse
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : SingleObserver<Response<List<PostDataItem>>> {
+
+                override fun onSuccess(response: Response<List<PostDataItem>>) {
+                //Do something()
+                }
+
+                override fun onSubscribe(d: Disposable) {}
+
+                override fun onError(e: Throwable) {
+                //Error handling
+                }
+            })
+            
 
 ## What does it look like?
 
