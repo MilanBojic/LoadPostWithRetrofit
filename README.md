@@ -2,9 +2,10 @@
 
 ## What is this?
 
-Through one simple project(introduction to retrofit), i want to shows how to get data(posts) from remote API.
+Through one simple project(introduction to retrofit), i want to shows how to get data(posts) from remote API using retrofit and RxJava.
 
-I am load posts from(this is one simple json response)
+I was loading posts from:
+
 https://jsonplaceholder.typicode.com/posts/
 
 
