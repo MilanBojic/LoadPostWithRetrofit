@@ -41,6 +41,7 @@ class PostDataItem(
 ## Define API interface
 
 interface ApiInterface {
+
     @GET("/posts")
     fun doGetPosts(): Single<Response<List<PostDataItem>>>}
     
