@@ -28,14 +28,20 @@ In order to use Retrofit + RxJava, you need to add dependency in your build.grad
 ## Define Model - POJO
 
 class PostDataItem(
+
     @SerializedName("userId") @Expose var userId: String,
+    
     @SerializedName("id") @Expose var id: String,
+    
     @SerializedName("title") var title: String,
+    
     @SerializedName("body") @Expose var body: String)
+    
   
 ## Define API interface
 
 interface ApiInterface {
+
     @GET("/posts")
     fun doGetPosts(): Single<Response<List<PostDataItem>>>
 }
