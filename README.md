@@ -41,14 +41,13 @@ class PostDataItem(
 ## Define API interface
 
 interface ApiInterface {
-
     @GET("/posts")
-    fun doGetPosts(): Single<Response<List<PostDataItem>>>
-}
+    fun doGetPosts(): Single<Response<List<PostDataItem>>>}
     
     
 ## Define Retrofit
 class APIClient {
+
     object SingletonConfig {
 
         private var retrofit: Retrofit? = null
@@ -71,6 +70,7 @@ class APIClient {
 
 ## Very easy to use:
   val apiInterface = APIClient.SingletonConfig.getRetrofit()?.create(ApiInterface::class.java)
+  
   singleResponse = apiInterface!!.doGetPosts()      
   
         singleResponse
